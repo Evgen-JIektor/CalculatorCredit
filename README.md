@@ -9,6 +9,6 @@ git clone https://github.com/Evgen-JIektor/CalculatorCredit.git
 mvn clear install
 
 Переходим в паку target выполняем команду
-java - jar ( и да делее название jar файла из папки target )
+java - jar serving-web-content-0.0.1-SNAPSHOT.jar
 
 переходим в браузер в http://localhost:8080/calc
