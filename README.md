@@ -6,7 +6,7 @@
 git clone https://github.com/Evgen-JIektor/CalculatorCredit.git
 
 Переходим в папку с проектом и выполняем команду 
-mvn clear install
+mvn clean install
 
 Переходим в паку target выполняем команду
 java - jar serving-web-content-0.0.1-SNAPSHOT.jar
