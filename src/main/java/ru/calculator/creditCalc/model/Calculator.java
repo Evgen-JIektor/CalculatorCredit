@@ -12,7 +12,6 @@ import java.util.List;
 public class Calculator {
 
     private float x; // месячный плетеж
-    //private float x1; // месячный плетеж, вторая формула
 
     @NotEmpty(message = "not be empty")
     @Min(value = 100000, message="Minimum value should be 100000" )
@@ -139,9 +138,8 @@ public class Calculator {
         /*System.out.println(dateFormat.format(cal.getTime()));*/
 
         p = (st / 100) / 12;  // процентная ставка
-
         x = (float) (s * (p + p / (Math.pow((1 + p), n) - 1)));
-        //  x1 = (float) (S * (p / (1 - Math.pow((1 + p),-n))));
+        //  x = (float) (S * (p / (1 - Math.pow((1 + p),-n))));
 
         sn = s; // остаток задолженности изначально составляет размер кредита
 
@@ -153,9 +151,7 @@ public class Calculator {
             }
 
             pn = sn * p; // начисленные проценты
-
             s = x - pn; //часть выплаты, идущая на погашение долга
-
             sn = sn - s; // остаток задолженности на период
 
             if (i == n + 1) {  // n+1 месяц выводим остаток в 0
