@@ -24,9 +24,9 @@ public class Calculator {
     @NotEmpty(message = "not be empty")
     @Min(value=12, message="Minimum value should be 12" )
     @Max(value=60, message="Maximum value should be 60")
-    private int n = 15;  // кредит на n месяцев, допустимые значения 12,9 - 23,9
+    private int n = 19;  // кредит на n месяцев
 
-    private float st = 15; // процентная ставка
+    private float st = 15; // процентная ставка, допустимые значения 12,9 - 23,9
     private float pn;  // начисленные проценты
     private float sn; // остаток задолженности на период
     private int i; // номер платежа

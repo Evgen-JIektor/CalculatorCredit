@@ -19,9 +19,7 @@ public class CalcController{
 
     @PostMapping("/calc")
     public String AddCalc(@ModelAttribute("calculator") @Valid Calculator calculator, BindingResult bindingResult){
-        if (bindingResult.hasErrors()) {
-            return "calc";
-        }
+        bindingResult.hasErrors();
     return "calc";
     }
 
