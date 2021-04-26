@@ -24,7 +24,7 @@ public class Calculator {
     @NotEmpty(message = "not be empty")
     @Min(value=12, message="Minimum value should be 12" )
     @Max(value=60, message="Maximum value should be 60")
-    private int n = 15;  // кредит на n месяцев
+    private int n = 15;  // кредит на n месяцев, допустимые значения 12,9 - 23,9
 
     private float st = 15; // процентная ставка
     private float pn;  // начисленные проценты
@@ -136,7 +136,7 @@ public class Calculator {
 
         p = (st / 100) / 12;  // процентная ставка
         x = (float) (s * (p + p / (Math.pow((1 + p), n) - 1)));
-        //  x = (float) (S * (p / (1 - Math.pow((1 + p),-n))));
+        //  x = (float) (S * (p / (1 - Math.pow((1 + p),-n)))); // вторая формула для расчета
 
         sn = s; // остаток задолженности изначально составляет размер кредита
 
