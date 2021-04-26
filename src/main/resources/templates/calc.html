@@ -10,12 +10,12 @@
 <div class="block_form">
     <form th:action="@{/calc}" th:object="${calculator}" method="post">
         <div class="block_field">
-            <label for="s">Сумма кредита</label>
-            <input type="text" th:field="*{s}" id="s" placeholder="2 000 001" />
+            <label for="s">Сумма кредита*</label>
+            <input type="text" th:field="*{s}" id="s" placeholder="2 000 000" />
             <div class="errors" th:if="${#fields.hasErrors('s')}" th:errors="*{s}">s Error</div>
         </div>
         <div class="block_field">
-            <label for="n">Срок кредита(месяц) </label>
+            <label for="n">Срок кредита(месяц)** </label>
             <input type="text" th:field="*{n}" id="n" placeholder="19" />
             <div class="errors" th:if="${#fields.hasErrors('n')}" th:errors="*{n}">n Error</div>
         </div>
@@ -26,7 +26,10 @@
 
         <button type="submit">Рассчитать</button>
     </form>
+    <p>&nbsp;&nbsp;* Сумма кредина должна быть в пределах от 100 000 до 5 000 000</p>
+    <p>** Срок кредита должна быть в пределах от 12 до 60 месяцев</p>
 </div>
+
 <div class="block_table">
     <table>
         <thead>

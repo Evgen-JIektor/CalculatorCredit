@@ -16,7 +16,7 @@ public class Calculator {
     @NotEmpty(message = "not be empty")
     @Min(value = 100000, message="Minimum value should be 100000" )
     @Max(value = 5000000, message="Maximum value should be 5000000")
-    private float s = 2000000; // стартовая сумма кредита
+    private float s = 500000; // стартовая сумма кредита
 
     private float sl; // часть выплаты, идущая на погашение долга
     private float p;  // процентная ставка в абсолютной велечине
@@ -24,7 +24,7 @@ public class Calculator {
     @NotEmpty(message = "not be empty")
     @Min(value=12, message="Minimum value should be 12" )
     @Max(value=60, message="Maximum value should be 60")
-    private int n = 21;  // кредит на n месяцев
+    private int n = 15;  // кредит на n месяцев
 
     private float st = 15; // процентная ставка
     private float pn;  // начисленные проценты
@@ -128,9 +128,6 @@ public class Calculator {
 
     public List<Calculator> foo() {
 
-        setS(s);
-        setN(n);
-
         List<Calculator> credit = new ArrayList<>();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM");
@@ -143,31 +140,34 @@ public class Calculator {
 
         sn = s; // остаток задолженности изначально составляет размер кредита
 
-        for (int i = 1; i <= n + 1; i++) {
+        if (s >= 100000 && s <= 5000000 && n >= 12 && n <= 60 ) {
 
-            if (i == n + 1) { //  n+1 месяц  делаем платеж равным остатку и не снимаем проценты т.к. процент расчитан на n месяцев
-                x = sn;
-                sn = 0;
+            for (int i = 1; i <= n + 1; i++) {
+
+                if (i == n + 1) { //  n+1 месяц  делаем платеж равным остатку и не снимаем проценты т.к. процент расчитан на n месяцев
+                    x = sn;
+                    sn = 0;
+                }
+
+                pn = sn * p; // начисленные проценты
+                s = x - pn; //часть выплаты, идущая на погашение долга
+                sn = sn - s; // остаток задолженности на период
+
+                if (i == n + 1) {  // n+1 месяц выводим остаток в 0
+                    sn = 0;
+                }
+
+                x = (float) (Math.round(x * 100.0) / 100.0);   // оставляем 2 знака после запятой со стандартным округлением
+                pn = (float) (Math.round(pn * 100.0) / 100.0);
+                s = (float) (Math.round(s * 100.0) / 100.0);
+                sn = (float) (Math.round(sn * 100.0) / 100.0);
+
+                cal.add(Calendar.MONTH, 1);  // расчет первой выплаты кредита начинается со следующего месяца
+                String data = dateFormat.format(cal.getTime());
+
+                credit.add(new Calculator(x, s, sl, p, n, st, pn, sn, i, data));
+
             }
-
-            pn = sn * p; // начисленные проценты
-            s = x - pn; //часть выплаты, идущая на погашение долга
-            sn = sn - s; // остаток задолженности на период
-
-            if (i == n + 1) {  // n+1 месяц выводим остаток в 0
-                sn = 0;
-            }
-
-            x = (float) (Math.round(x * 100.0) / 100.0);   // оставляем 2 знака после запятой со стандартным округлением
-            pn = (float) (Math.round(pn * 100.0) / 100.0);
-            s = (float) (Math.round(s * 100.0) / 100.0);
-            sn = (float) (Math.round(sn * 100.0) / 100.0);
-
-            cal.add(Calendar.MONTH, 1);  // расчет первой выплаты кредита начинается со следующего месяца
-            String data = dateFormat.format(cal.getTime());
-
-            credit.add(new Calculator(x, s, sl, p, n, st, pn, sn, i, data));
-
         }
         /*credit.stream().forEach(h -> System.out.println(h));*/
         return credit;
